@@ -26,13 +26,28 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        qsmasettingswidget.cpp \
+        qwmasettingswidget.cpp \
+    qessettingswidget.cpp \
+    qltpsettingswidget.cpp \
+    qnumbersettingswidget.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+        qsmasettingswidget.h \
+        qwmasettingswidget.h \
+    qessettingswidget.h \
+    qltpsettingswidget.h \
+    qnumbersettingswidget.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        qsmasettingswidget.ui \
+        qwmasettingswidget.ui \
+    qessettingswidget.ui \
+    qltpsettingswidget.ui \
+    qnumbersettingswidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

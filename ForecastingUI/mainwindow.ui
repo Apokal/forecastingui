@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>480</height>
+    <height>516</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Praca dyplomowa: Mykhailo Butkevych</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -28,17 +28,28 @@
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="QRadioButton" name="radioButton_2">
+        <widget class="QRadioButton" name="customFile_RadBtn">
          <property name="text">
           <string>Custom input file:</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_3"/>
-       </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="lineEdit_2"/>
+        <widget class="QLineEdit" name="outputFilePath_LnEdit">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QRadioButton" name="randomGenerator_RadBtn">
+         <property name="text">
+          <string>Use random generator</string>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label">
@@ -47,20 +58,17 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
-       </item>
        <item row="0" column="4">
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="customFilePath_Btn">
          <property name="text">
           <string>...</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QRadioButton" name="radioButton">
-         <property name="text">
-          <string>Use random generator</string>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="genFileSize_LnEdit">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -71,8 +79,14 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="customFilePath_LnEdit"/>
+       </item>
        <item row="3" column="4">
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="outputFilePath_Btn">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -82,7 +96,22 @@
      </widget>
     </item>
     <item>
-     <widget class="QGroupBox" name="groupBox_2">
+     <widget class="QGroupBox" name="numberSettings_GrBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="title">
+       <string>Number settings:</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QNumberSettingsWidget" name="numberSettings_Wdgt" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="quantitiveMethods_GrBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -96,45 +125,56 @@
        <item>
         <widget class="QToolBox" name="toolBox">
          <property name="currentIndex">
-          <number>0</number>
+          <number>3</number>
          </property>
-         <widget class="QWidget" name="PageSMA">
+         <widget class="QSMASettingsWidget" name="PageSMA">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>72</height>
+            <height>86</height>
            </rect>
           </property>
           <attribute name="label">
            <string>SMA</string>
           </attribute>
          </widget>
-         <widget class="QWidget" name="PageWMA">
+         <widget class="QWMASettingsWidget" name="PageWMA">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>72</height>
+            <height>86</height>
            </rect>
           </property>
           <attribute name="label">
            <string>WMA</string>
           </attribute>
          </widget>
-         <widget class="QWidget" name="PageES">
+         <widget class="QESSettingsWidget" name="PageES">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>602</width>
+            <height>86</height>
+           </rect>
+          </property>
           <attribute name="label">
            <string>ES</string>
           </attribute>
          </widget>
-         <widget class="QWidget" name="PageNAIVE">
-          <attribute name="label">
-           <string>NAIVE</string>
-          </attribute>
-         </widget>
-         <widget class="QWidget" name="PageLTP">
+         <widget class="QLTPSettingsWidget" name="PageLTP">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>602</width>
+            <height>86</height>
+           </rect>
+          </property>
           <attribute name="label">
            <string>LTP</string>
           </attribute>
@@ -145,7 +185,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="run_Btn">
       <property name="text">
        <string>Run</string>
       </property>
@@ -174,6 +214,38 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QSMASettingsWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">qsmasettingswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QWMASettingsWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">qwmasettingswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QESSettingsWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">qessettingswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QLTPSettingsWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">qltpsettingswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QNumberSettingsWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">qnumbersettingswidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

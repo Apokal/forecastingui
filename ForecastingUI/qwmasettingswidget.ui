@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QWMASettingsWidget</class>
+ <widget class="QWidget" name="QWMASettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>426</width>
+    <height>71</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="3">
+    <widget class="QDoubleSpinBox" name="weightScheme_3_SpinBox"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QDoubleSpinBox" name="weightScheme1_SpinBox"/>
+   </item>
+   <item row="1" column="2">
+    <widget class="QDoubleSpinBox" name="weightScheme_2_SpinBox"/>
+   </item>
+   <item row="1" column="4">
+    <widget class="QDoubleSpinBox" name="weightScheme_4_SpinBox"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Weightening scheme:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QCheckBox" name="useMethodCheckBox">
+     <property name="text">
+      <string>Use method</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="5">
+    <widget class="QDoubleSpinBox" name="weightScheme_5_SpinBox"/>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
