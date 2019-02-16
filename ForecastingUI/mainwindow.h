@@ -7,6 +7,10 @@ namespace Ui {
 class MainWindow;
 }
 
+namespace Logic {
+    class QModelLogic;
+}
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -24,6 +28,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    std::unique_ptr<Logic::QModelLogic> logic;
 };
 
 #endif // MAINWINDOW_H

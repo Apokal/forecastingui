@@ -32,14 +32,14 @@ SOURCES += \
     qessettingswidget.cpp \
     qltpsettingswidget.cpp \
     qnumbersettingswidget.cpp \
-    Logic/Source.cpp \
     main.cpp \
     mainwindow.cpp \
     qessettingswidget.cpp \
     qltpsettingswidget.cpp \
     qnumbersettingswidget.cpp \
     qsmasettingswidget.cpp \
-    qwmasettingswidget.cpp
+    qwmasettingswidget.cpp \
+    Logic/qmodellogic.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -58,7 +58,6 @@ HEADERS += \
     Logic/ES.h \
     Logic/fileGenerator.h \
     Logic/LTP.h \
-    Logic/RunEntry.h \
     Logic/SMA.h \
     Logic/vectorGenerator.h \
     Logic/WMA.h \
@@ -67,7 +66,8 @@ HEADERS += \
     qltpsettingswidget.h \
     qnumbersettingswidget.h \
     qsmasettingswidget.h \
-    qwmasettingswidget.h
+    qwmasettingswidget.h \
+    Logic/qmodellogic.h
 
 FORMS += \
         mainwindow.ui \

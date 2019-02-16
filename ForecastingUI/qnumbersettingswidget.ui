@@ -15,27 +15,6 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Number type:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QComboBox" name="comboBox">
-     <item>
-      <property name="text">
-       <string>Integer</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Float</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Precision:</string>
