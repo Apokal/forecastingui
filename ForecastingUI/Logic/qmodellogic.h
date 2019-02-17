@@ -1,7 +1,6 @@
 #ifndef QMODELLOGIC_H
 #define QMODELLOGIC_H
 
-#include <vector>
 #include <functional>
 #include <map>
 #include <string>
@@ -9,18 +8,20 @@
 
 namespace Logic
 {
+    using QuantativeMethodsExecutionTime = std::map<std::string, std::chrono::milliseconds>;
+
     class QModelLogic
     {
     public:
         QModelLogic();
 
         void Run();
-        std::map<std::string, std::chrono::milliseconds> last_exec_time();
+        QuantativeMethodsExecutionTime execution_time_resutls();
 
     private:
-        std::chrono::milliseconds RunEntry(std::vector<float> initVector, std::map<std::string, std::function<std::vector<float>(std::vector<float>)>> forecastMap, std::string forecastType);
+        //std::chrono::milliseconds RunEntry(std::vector<float> initVector, std::string quant_method_name, QuantativeMethod quant_method);
 
-        std::map<std::string, std::chrono::milliseconds> m_last_exec_time;
+        QuantativeMethodsExecutionTime m_quant_meths_exec_time;
     };
 
 }

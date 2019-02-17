@@ -65,16 +65,16 @@ void MainWindow::on_run_Btn_clicked()
 {
     logic->Run();
 
-    auto exec_time = logic->last_exec_time();
+//    auto exec_time = logic->last_exec_time();
 
-    std::string msg = "Czas wykonywania (ms): \n";
-    for ( const auto& p : exec_time )
-    {
-        msg += p.first + ": " + std::to_string(p.second.count()) + "\n";
-    }
+//    std::string msg = "Czas wykonywania (ms): \n";
+//    for ( const auto& p : exec_time )
+//    {
+//        msg += p.first + ": " + std::to_string(p.second.count()) + "\n";
+//    }
 
-    QMessageBox msgBox;
-    msgBox.setIcon(QMessageBox::Information);
-    msgBox.setText(msg.c_str());
-    msgBox.exec();
+//    QMessageBox msgBox;
+//    msgBox.setIcon(QMessageBox::Information);
+//    msgBox.setText(msg.c_str());
+//    msgBox.exec();
 }

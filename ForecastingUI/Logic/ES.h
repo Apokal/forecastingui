@@ -2,29 +2,53 @@
 #include <iostream>
 #include <vector>
 
-std::vector<float> ES(std::vector<float> initVector)
+#include "quantitativemethodbase.h"
+
+namespace Quantitative
 {
-    std::vector<float> resultVector;
-    float weightValue = 0.6f;
-    float MSE;
-    float sum_of_elems = 0;
+    class QESQuntitativeMethod : public QQuantitativeMethodBase
+    {
+    public:
 
-    std::cout << "Kalkulacja ES..." << std::endl;
+        struct Settings
+        {
 
-    resultVector.push_back(initVector[0]);
-    resultVector.push_back(initVector[0]);
+        };
 
-    for (int i = 2; i < initVector.size(); i++) {
-        float forecast = (weightValue * initVector[i - 1]) + ((1 - weightValue) * resultVector[i - 1]);
-        resultVector.push_back(forecast);
-    }
+        QESQuntitativeMethod (const Settings& settings)
+            : QQuantitativeMethodBase("ES"),
+              m_settings(settings)
+        {}
+        virtual ~QESQuntitativeMethod() {}
 
-    for (auto& n : resultVector)
-        sum_of_elems += n;
+        virtual std::vector<float> Run(std::vector<float> initVector)
+        {
+            std::vector<float> resultVector;
+            float weightValue = 0.6f;
+            float MSE;
+            float sum_of_elems = 0;
 
-    MSE = sum_of_elems / resultVector.size();
+            std::cout << "Kalkulacja ES..." << std::endl;
 
-    std::cout << "MSE = " << MSE << std::endl;
-    std::cout << "Obliczenia ES sie skonczyly" << std::endl;
-    return resultVector;
+            resultVector.push_back(initVector[0]);
+            resultVector.push_back(initVector[0]);
+
+            for (unsigned int i = 2; i < initVector.size(); i++) {
+                float forecast = (weightValue * initVector[i - 1]) + ((1 - weightValue) * resultVector[i - 1]);
+                resultVector.push_back(forecast);
+            }
+
+            for (auto& n : resultVector)
+                sum_of_elems += n;
+
+            MSE = sum_of_elems / resultVector.size();
+
+            std::cout << "MSE = " << MSE << std::endl;
+            std::cout << "Obliczenia ES sie skonczyly" << std::endl;
+            return resultVector;
+        }
+
+    private:
+        Settings m_settings;
+    };
 }

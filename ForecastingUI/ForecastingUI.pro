@@ -67,7 +67,8 @@ HEADERS += \
     qnumbersettingswidget.h \
     qsmasettingswidget.h \
     qwmasettingswidget.h \
-    Logic/qmodellogic.h
+    Logic/qmodellogic.h \
+    Logic/quantitativemethodbase.h
 
 FORMS += \
         mainwindow.ui \

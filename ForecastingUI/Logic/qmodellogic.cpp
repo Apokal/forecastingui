@@ -37,47 +37,42 @@ namespace Logic
 
         std::map<std::string, std::function<vector<float>(vector<float>)>> forecastMap =
         {
-            { "SMA", SMA},
-            { "WMA", WMA},
-            { "ES", ES},
-            { "LTP", LTP}
+//            { "SMA", SMA},
+//            { "WMA", WMA}, std::vector<float> weights = { 0.2f, 0.3f, 0.5f };
+//            { "ES", ES},
+//            { "LTP", LTP}
         };
 
-        m_last_exec_time.clear();
+        m_quant_meths_exec_time.clear();
         for (const auto& p : forecastMap)
         {
-            auto exec_time = RunEntry(initVector, forecastMap, p.first);
-            m_last_exec_time[p.first] = exec_time;
+            //auto exec_time = RunEntry(initVector, forecastMap, p.first);
+            auto exec_time = std::chrono::milliseconds(0);
+            m_quant_meths_exec_time[p.first] = exec_time;
         }
-
-//        auto sma = RunEntry(initVector, forecastMap, "SMA");
-//        auto wma = RunEntry(initVector, forecastMap, "WMA");
-//        auto es = RunEntry(initVector, forecastMap, "ES");
-//        auto ltp = RunEntry(initVector, forecastMap, "LTP");
     }
 
-    std::map<std::string, std::chrono::milliseconds> QModelLogic::last_exec_time()
+    QuantativeMethodsExecutionTime QModelLogic::execution_time_resutls()
     {
-        return m_last_exec_time;
+        return m_quant_meths_exec_time;
     }
 
-    std::chrono::milliseconds QModelLogic::RunEntry(std::vector<float> initVector, std::map<std::string, std::function<std::vector<float>(std::vector<float>)>> forecastMap,
-                                                    std::string forecastType)
-    {
-        typedef std::chrono::high_resolution_clock Clock;
-        std::vector<float> resultVector;
+//    std::chrono::milliseconds QModelLogic::RunEntry(std::vector<float> initVector, std::map<std::string, >> forecastMap,
+//                                                    std::string forecastType)
+//    {
+//        std::vector<float> resultVector;
 
-        using Clock = std::chrono::high_resolution_clock;
-        auto t_start = Clock::now();
+//        using Clock = std::chrono::high_resolution_clock;
+//        auto t_start = Clock::now();
 
-        resultVector = forecastMap[forecastType](initVector);
+//        resultVector = forecastMap[forecastType](initVector);
 
-        auto currdir = QDir::currentPath();
-        auto filepath = currdir.toStdString() + "/Pliki/" + forecastType + ".txt";
-        fileGenerator(filepath, resultVector);
+//        auto currdir = QDir::currentPath();
+//        auto filepath = currdir.toStdString() + "/Pliki/" + forecastType + ".txt";
+//        fileGenerator(filepath, resultVector);
 
-        auto t_end = Clock::now();
+//        auto t_end = Clock::now();
 
-        return std::chrono::duration_cast<std::chrono::milliseconds>(t_end - t_start);
-    }
+//        return std::chrono::duration_cast<std::chrono::milliseconds>(t_end - t_start);
+//    }
 }
