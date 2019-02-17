@@ -19,6 +19,12 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private:
+    void ParseSMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic);
+    void ParseWMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic);
+    void ParseESSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic);
+    void ParseLTPSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic);
+
 private slots:
     void on_customFilePath_Btn_clicked();
 
@@ -28,7 +34,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    std::unique_ptr<Logic::QModelLogic> logic;
+    std::unique_ptr<Logic::QModelLogic> m_logic;
 };
 
 #endif // MAINWINDOW_H

@@ -20,7 +20,7 @@ namespace Quantitative
         {}
         virtual ~QWMAQuntitativeMethod() {}
 
-        virtual std::vector<float> Run(std::vector<float> initVector)
+        virtual std::vector<float> run(std::vector<float> initVector)
         {
             std::vector<float> resultVector;
             unsigned int period = 3;

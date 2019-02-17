@@ -39,7 +39,7 @@ SOURCES += \
     qnumbersettingswidget.cpp \
     qsmasettingswidget.cpp \
     qwmasettingswidget.cpp \
-    Logic/qmodellogic.cpp
+    Logic/modellogic.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -67,8 +67,8 @@ HEADERS += \
     qnumbersettingswidget.h \
     qsmasettingswidget.h \
     qwmasettingswidget.h \
-    Logic/qmodellogic.h \
-    Logic/quantitativemethodbase.h
+    Logic/quantitativemethodbase.h \
+    Logic/modellogic.h
 
 FORMS += \
         mainwindow.ui \

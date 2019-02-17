@@ -21,7 +21,7 @@ namespace Quantitative
         {}
         virtual ~QSMAQuntitativeMethod() {}
 
-        virtual std::vector<float> Run(std::vector<float> initVector)
+        virtual std::vector<float> run(std::vector<float> initVector)
         {
             std::vector<float> resultVector;
             unsigned int length = 5; // Liczba okresow

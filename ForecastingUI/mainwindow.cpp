@@ -4,7 +4,11 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include "Logic/qmodellogic.h"
+#include "Logic/modellogic.h"
+#include "Logic/SMA.h"
+#include "Logic/WMA.h"
+#include "Logic/ES.h"
+#include "Logic/LTP.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    logic = std::make_unique<Logic::QModelLogic>();
+    m_logic = std::make_unique<Logic::QModelLogic>();
 
     QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->genFileSize_LnEdit, &QLineEdit::setDisabled);
     QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->outputFilePath_LnEdit, &QLineEdit::setDisabled);
@@ -61,20 +65,62 @@ void MainWindow::on_outputFilePath_Btn_clicked()
     }
 }
 
+void MainWindow::ParseSMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+{
+    const QSMASettingsWidget* w = qobject_cast<const QSMASettingsWidget*>(settingswidget);
+    w->x();
+
+    Quantitative::QSMAQuntitativeMethod::Settings settings;
+    logic->AddQuantitativeMethod(std::make_unique<Quantitative::QSMAQuntitativeMethod>(settings));
+}
+
+void MainWindow::ParseWMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+{
+    const QWMASettingsWidget* w = qobject_cast<const QWMASettingsWidget*>(settingswidget);
+    w->x();
+
+    Quantitative::QWMAQuntitativeMethod::Settings settings;
+    settings.weights = { 0.2f, 0.3f, 0.5f };
+    logic->AddQuantitativeMethod(std::make_unique<Quantitative::QWMAQuntitativeMethod>(settings));
+}
+
+void MainWindow::ParseESSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+{
+    const QESSettingsWidget* w = qobject_cast<const QESSettingsWidget*>(settingswidget);
+    w->x();
+
+    Quantitative::QESQuntitativeMethod::Settings settings;
+    logic->AddQuantitativeMethod(std::make_unique<Quantitative::QESQuntitativeMethod>(settings));
+}
+
+void MainWindow::ParseLTPSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+{
+    const QLTPSettingsWidget* w = qobject_cast<const QLTPSettingsWidget*>(settingswidget);
+    w->x();
+
+    Quantitative::QLTPQuntitativeMethod::Settings settings;
+    logic->AddQuantitativeMethod(std::make_unique<Quantitative::QLTPQuntitativeMethod>(settings));
+}
+
 void MainWindow::on_run_Btn_clicked()
 {
-    logic->Run();
+    ParseSMASettingsAndUpdateLogic(ui->PageSMA, m_logic);
+    ParseWMASettingsAndUpdateLogic(ui->PageWMA, m_logic);
+    ParseESSettingsAndUpdateLogic(ui->PageES, m_logic);
+    ParseLTPSettingsAndUpdateLogic(ui->PageLTP, m_logic);
 
-//    auto exec_time = logic->last_exec_time();
+    m_logic->Run();
 
-//    std::string msg = "Czas wykonywania (ms): \n";
-//    for ( const auto& p : exec_time )
-//    {
-//        msg += p.first + ": " + std::to_string(p.second.count()) + "\n";
-//    }
+    auto exec_time = m_logic->execution_time_resutls();
 
-//    QMessageBox msgBox;
-//    msgBox.setIcon(QMessageBox::Information);
-//    msgBox.setText(msg.c_str());
-//    msgBox.exec();
+    std::string msg = "Czas wykonywania (ms): \n";
+    for ( const auto& p : exec_time )
+    {
+        msg += p.first + ": " + std::to_string(p.second.count()) + "\n";
+    }
+
+    QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setText(msg.c_str());
+    msgBox.exec();
 }
