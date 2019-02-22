@@ -9,6 +9,7 @@ class MainWindow;
 
 namespace Logic {
     class QModelLogic;
+    struct QRunSettings;
 }
 
 class MainWindow : public QMainWindow
@@ -24,6 +25,7 @@ private:
     void ParseWMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic);
     void ParseESSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic);
     void ParseLTPSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic);
+    Logic::QRunSettings ParseGeneralSettingsAndUpdateLogic(const QWidget* num_setts_widget);
 
 private slots:
     void on_customFilePath_Btn_clicked();

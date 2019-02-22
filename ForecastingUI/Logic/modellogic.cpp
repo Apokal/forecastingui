@@ -12,8 +12,8 @@
 
 #include <QDir>
 
-#include "vectorGenerator.h"
-#include "fileGenerator.h"
+#include "inputgenerator.h"
+#include "file.h"
 #include "SMA.h"
 #include "WMA.h"
 #include "ES.h"
@@ -31,14 +31,15 @@ namespace Logic
         m_quant_methods.push_back(std::move(pmethod));
     }
 
-    void QModelLogic::Run()
+    void QModelLogic::Run(const QRunSettings& settings)
     {
-        std::vector<float> initVector = vectorGenerator(100000);
+        QInputGenerator gen;
+        std::vector<float> initVector = gen.generate(settings.inputsize);
 
         auto currdir = QDir::currentPath();
         auto filepath = currdir.toStdString() + "/Pliki/initVector.txt";
 
-        fileGenerator(filepath, initVector);
+        write_to_file(filepath, initVector);
 
         m_quant_meths_exec_time.clear();
         for (const auto& p : m_quant_methods)
@@ -48,7 +49,7 @@ namespace Logic
         }
     }
 
-    QuantativeMethodsExecutionTime QModelLogic::execution_time_resutls()
+    QuantativeMethodsExecutionTime QModelLogic::execution_time_results()
     {
         return m_quant_meths_exec_time;
     }
@@ -64,7 +65,7 @@ namespace Logic
 
         auto currdir = QDir::currentPath();
         auto filepath = currdir.toStdString() + "/Pliki/" + pmethod->name() + ".txt";
-        fileGenerator(filepath, resultVector);
+        write_to_file(filepath, resultVector);
 
         auto t_end = Clock::now();
 

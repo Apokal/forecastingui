@@ -23,7 +23,8 @@ namespace Quantitative
         virtual std::vector<float> run(std::vector<float> initVector)
         {
             std::vector<float> resultVector;
-            unsigned int period = 3;
+            auto weights = m_settings.weights;
+            unsigned int period = static_cast<unsigned int>(weights.size());
 
             float calcValue = 0; // weightened, calculated value
             unsigned int j_inc = 0; // calc loop helpers for calcValue
@@ -37,7 +38,7 @@ namespace Quantitative
                 resultVector.push_back(initVector[i]);
             }
 
-            auto weights = m_settings.weights;
+
             for (unsigned int i = period; i < initVector.size(); i++) {
                 for (unsigned int j = j_inc; j < period_inc; j++) {
                     if (w_inc % period == 0)

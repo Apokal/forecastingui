@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_logic = std::make_unique<Logic::QModelLogic>();
 
-    QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->genFileSize_LnEdit, &QLineEdit::setDisabled);
+    QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->genInputSize_SpBox, &QLineEdit::setDisabled);
     QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->outputFilePath_LnEdit, &QLineEdit::setDisabled);
     QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->outputFilePath_Btn, &QPushButton::setDisabled);
     QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->numberSettings_GrBox, &QWidget::setDisabled);
@@ -102,16 +102,27 @@ void MainWindow::ParseLTPSettingsAndUpdateLogic(const QWidget* settingswidget, s
     logic->AddQuantitativeMethod(std::make_unique<Quantitative::QLTPQuntitativeMethod>(settings));
 }
 
+Logic::QRunSettings MainWindow::ParseGeneralSettingsAndUpdateLogic(const QWidget* num_setts_widget)
+{
+    const auto* w = qobject_cast<const QNumberSettingsWidget*>(num_setts_widget);
+    w->x();
+
+    Logic::QRunSettings setts;
+    setts.inputsize = static_cast<size_t>(ui->genInputSize_SpBox->value());
+    return setts;
+}
+
 void MainWindow::on_run_Btn_clicked()
 {
     ParseSMASettingsAndUpdateLogic(ui->PageSMA, m_logic);
     ParseWMASettingsAndUpdateLogic(ui->PageWMA, m_logic);
     ParseESSettingsAndUpdateLogic(ui->PageES, m_logic);
     ParseLTPSettingsAndUpdateLogic(ui->PageLTP, m_logic);
+    auto runsetts = ParseGeneralSettingsAndUpdateLogic(ui->numberSettings_Wdgt);
 
-    m_logic->Run();
+    m_logic->Run(runsetts);
 
-    auto exec_time = m_logic->execution_time_resutls();
+    auto exec_time = m_logic->execution_time_results();
 
     std::string msg = "Czas wykonywania (ms): \n";
     for ( const auto& p : exec_time )

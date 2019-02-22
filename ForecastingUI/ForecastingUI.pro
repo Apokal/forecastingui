@@ -56,10 +56,8 @@ HEADERS += \
     qsmasettingswidget.h \
     qwmasettingswidget.h \
     Logic/ES.h \
-    Logic/fileGenerator.h \
     Logic/LTP.h \
     Logic/SMA.h \
-    Logic/vectorGenerator.h \
     Logic/WMA.h \
     mainwindow.h \
     qessettingswidget.h \
@@ -68,7 +66,9 @@ HEADERS += \
     qsmasettingswidget.h \
     qwmasettingswidget.h \
     Logic/quantitativemethodbase.h \
-    Logic/modellogic.h
+    Logic/modellogic.h \
+    Logic/file.h \
+    Logic/inputgenerator.h
 
 FORMS += \
         mainwindow.ui \
