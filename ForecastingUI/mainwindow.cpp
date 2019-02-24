@@ -147,16 +147,18 @@ void MainWindow::on_run_Btn_clicked()
 
     auto exec_time = m_logic->execution_time_results();
 
-    std::string msg = "Czas wykonywania (ms): \n";
+    std::cout << "-------------------" << std::endl;
+    std::cout << "Czas wykonywania (ms): " << std::endl;
     for ( const auto& p : exec_time )
     {
-        msg += p.first + ": " + std::to_string(p.second.count()) + "\n";
+        std::string msg = p.first + ": " + std::to_string(p.second.count());
+        std::cout << msg << std::endl;
     }
 
-    QMessageBox msgBox;
-    msgBox.setIcon(QMessageBox::Information);
-    msgBox.setText(msg.c_str());
-    msgBox.exec();
+//    QMessageBox msgBox;
+//    msgBox.setIcon(QMessageBox::Information);
+//    msgBox.setText(msg.c_str());
+//    msgBox.exec();
 }
 
 void MainWindow::on_execTimeResults_PushBtn_clicked()
