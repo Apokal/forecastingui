@@ -33,6 +33,7 @@ namespace Logic
         void AddQuantitativeMethod(QuantitativeMethodPtr pmethod);
         void Run(const QRunSettings& settings);
         QuantativeMethodsExecutionTime execution_time_results();
+        void ClearMethods();
 
     private:
         std::chrono::milliseconds ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string &output_dir);

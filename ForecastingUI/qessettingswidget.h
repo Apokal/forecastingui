@@ -15,6 +15,9 @@ public:
     explicit QESSettingsWidget(QWidget *parent = nullptr);
     ~QESSettingsWidget();
 
+    bool useMethod() const;
+    double smoothConstant() const;
+
 private:
     Ui::QESSettingsWidget *ui;
 };

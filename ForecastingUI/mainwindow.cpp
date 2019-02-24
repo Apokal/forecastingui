@@ -93,10 +93,13 @@ void MainWindow::ParseWMASettingsAndUpdateLogic(const QWidget* settingswidget, s
 void MainWindow::ParseESSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
 {
     const QESSettingsWidget* w = qobject_cast<const QESSettingsWidget*>(settingswidget);
-    w->x();
 
-    Quantitative::QESQuntitativeMethod::Settings settings;
-    logic->AddQuantitativeMethod(std::make_unique<Quantitative::QESQuntitativeMethod>(settings));
+    if (w->useMethod())
+    {
+        Quantitative::QESQuntitativeMethod::Settings settings;
+        settings.smoothConstant = static_cast<float>(w->smoothConstant());
+        logic->AddQuantitativeMethod(std::make_unique<Quantitative::QESQuntitativeMethod>(settings));
+    }
 }
 
 void MainWindow::ParseLTPSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
@@ -121,6 +124,7 @@ Logic::QRunSettings MainWindow::ParseGeneralSettingsAndUpdateLogic(const QWidget
 
 void MainWindow::on_run_Btn_clicked()
 {
+    m_logic->ClearMethods();
     ParseSMASettingsAndUpdateLogic(ui->PageSMA, m_logic);
     ParseWMASettingsAndUpdateLogic(ui->PageWMA, m_logic);
     ParseESSettingsAndUpdateLogic(ui->PageES, m_logic);

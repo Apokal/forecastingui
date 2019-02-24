@@ -12,7 +12,7 @@ namespace Quantitative
 
         struct Settings
         {
-
+            float smoothConstant = 0.0f;
         };
 
         QESQuntitativeMethod (const Settings& settings)
@@ -24,7 +24,7 @@ namespace Quantitative
         virtual std::vector<float> run(std::vector<float> initVector)
         {
             std::vector<float> resultVector;
-            float weightValue = 0.6f;
+            float weightValue = m_settings.smoothConstant;
             float MSE;
             float sum_of_elems = 0;
 

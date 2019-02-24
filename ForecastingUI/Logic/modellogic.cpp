@@ -58,6 +58,11 @@ namespace Logic
         return m_quant_meths_exec_time;
     }
 
+    void QModelLogic::ClearMethods()
+    {
+        m_quant_methods.clear();
+    }
+
     std::chrono::milliseconds QModelLogic::ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string& output_dir)
     {
         std::vector<float> resultVector;
