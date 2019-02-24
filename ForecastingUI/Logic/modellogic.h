@@ -35,7 +35,7 @@ namespace Logic
         QuantativeMethodsExecutionTime execution_time_results();
 
     private:
-        std::chrono::milliseconds ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector);
+        std::chrono::milliseconds ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string &output_dir);
 
         std::vector<QuantitativeMethodPtr>  m_quant_methods;
         QuantativeMethodsExecutionTime      m_quant_meths_exec_time;

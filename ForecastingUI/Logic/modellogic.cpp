@@ -36,15 +36,19 @@ namespace Logic
         QInputGenerator gen;
         std::vector<float> initVector = gen.generate(settings.inputsize);
 
-        auto currdir = QDir::currentPath();
-        auto filepath = currdir.toStdString() + "/Pliki/initVector.txt";
+        QDir output_dir(settings.output_dir.c_str());
+        if (!output_dir.exists())
+        {
+            output_dir.mkdir(settings.output_dir.c_str());
+        }
 
+        auto filepath = settings.output_dir + "/initVector.txt";
         write_to_file(filepath, initVector);
 
         m_quant_meths_exec_time.clear();
         for (const auto& p : m_quant_methods)
         {
-            auto exec_time = ExecuteMethod(p.get(), initVector);
+            auto exec_time = ExecuteMethod(p.get(), initVector, settings.output_dir);
             m_quant_meths_exec_time[p->name()] = exec_time;
         }
     }
@@ -54,7 +58,7 @@ namespace Logic
         return m_quant_meths_exec_time;
     }
 
-    std::chrono::milliseconds QModelLogic::ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector)
+    std::chrono::milliseconds QModelLogic::ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string& output_dir)
     {
         std::vector<float> resultVector;
 
@@ -64,7 +68,7 @@ namespace Logic
         resultVector = pmethod->run(initVector);
 
         auto currdir = QDir::currentPath();
-        auto filepath = currdir.toStdString() + "/Pliki/" + pmethod->name() + ".txt";
+        auto filepath = output_dir + "/" + pmethod->name() + ".txt";
         write_to_file(filepath, resultVector);
 
         auto t_end = Clock::now();

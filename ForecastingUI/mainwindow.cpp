@@ -19,12 +19,14 @@ MainWindow::MainWindow(QWidget *parent) :
     m_logic = std::make_unique<Logic::QModelLogic>();
 
     QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->genInputSize_SpBox, &QLineEdit::setDisabled);
-    QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->outputFilePath_LnEdit, &QLineEdit::setDisabled);
-    QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->outputFilePath_Btn, &QPushButton::setDisabled);
     QObject::connect(ui->customFile_RadBtn, &QRadioButton::toggled, ui->numberSettings_GrBox, &QWidget::setDisabled);
 
     QObject::connect(ui->randomGenerator_RadBtn, &QRadioButton::toggled, ui->customFilePath_LnEdit, &QLineEdit::setDisabled);
     QObject::connect(ui->randomGenerator_RadBtn, &QRadioButton::toggled, ui->customFilePath_Btn, &QPushButton::setDisabled);
+
+    // setting up default dir
+    QString output_dir = QCoreApplication::applicationDirPath() + "/Pliki";
+    ui->outputFilePath_LnEdit->setText(output_dir);
 }
 
 MainWindow::~MainWindow()
@@ -109,6 +111,7 @@ Logic::QRunSettings MainWindow::ParseGeneralSettingsAndUpdateLogic(const QWidget
 
     Logic::QRunSettings setts;
     setts.inputsize = static_cast<size_t>(ui->genInputSize_SpBox->value());
+    setts.output_dir = ui->outputFilePath_LnEdit->text().toStdString();
     return setts;
 }
 
