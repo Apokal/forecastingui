@@ -22,7 +22,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="spinBox"/>
+    <widget class="QSpinBox" name="precision_SpnBox">
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>2</number>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_3">
@@ -32,10 +39,21 @@
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="spinBox_2"/>
+    <widget class="QSpinBox" name="minVal_SpnBox">
+     <property name="minimum">
+      <number>0</number>
+     </property>
+     <property name="value">
+      <number>10</number>
+     </property>
+    </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="spinBox_3"/>
+    <widget class="QSpinBox" name="maxVal_SpnBox">
+     <property name="value">
+      <number>20</number>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

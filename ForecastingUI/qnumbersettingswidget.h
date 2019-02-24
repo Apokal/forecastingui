@@ -15,6 +15,10 @@ public:
     explicit QNumberSettingsWidget(QWidget *parent = nullptr);
     ~QNumberSettingsWidget();
 
+    int precision() const;
+    float min_value() const;
+    float max_value() const;
+
 private:
     Ui::QNumberSettingsWidget *ui;
 };

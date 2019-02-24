@@ -12,3 +12,19 @@ QNumberSettingsWidget::~QNumberSettingsWidget()
 {
     delete ui;
 }
+
+
+int QNumberSettingsWidget::precision() const
+{
+    return ui->precision_SpnBox->value();
+}
+
+float QNumberSettingsWidget::min_value() const
+{
+    return ui->minVal_SpnBox->value();
+}
+
+float QNumberSettingsWidget::max_value() const
+{
+    return ui->maxVal_SpnBox->value();
+}

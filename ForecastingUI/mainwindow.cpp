@@ -124,6 +124,11 @@ Logic::QRunSettings MainWindow::ParseGeneralSettingsAndUpdateLogic(const QWidget
     Logic::QRunSettings setts;
     setts.inputsize = static_cast<size_t>(ui->genInputSize_SpBox->value());
     setts.output_dir = ui->outputFilePath_LnEdit->text().toStdString();
+
+    setts.precision = static_cast<unsigned int>(ui->numberSettings_Wdgt->precision());
+    setts.min_value = ui->numberSettings_Wdgt->min_value();
+    setts.max_value = ui->numberSettings_Wdgt->max_value();
+
     return setts;
 }
 

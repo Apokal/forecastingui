@@ -34,7 +34,7 @@ namespace Logic
     void QModelLogic::Run(const QRunSettings& settings)
     {
         QInputGenerator gen;
-        std::vector<float> initVector = gen.generate(settings.inputsize);
+        std::vector<float> initVector = gen.generate(settings.inputsize, settings.min_value, settings.max_value, settings.precision);
 
         QDir output_dir(settings.output_dir.c_str());
         if (!output_dir.exists())

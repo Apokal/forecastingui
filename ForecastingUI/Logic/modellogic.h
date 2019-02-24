@@ -22,6 +22,10 @@ namespace Logic
 
         size_t inputsize = 0;
 
+        float min_value = 0.0f;
+        float max_value = 0.0f;
+        unsigned int precision = 0;
+
         std::string output_dir;
     };
 
