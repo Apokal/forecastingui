@@ -72,8 +72,12 @@ void MainWindow::ParseSMASettingsAndUpdateLogic(const QWidget* settingswidget, s
     const QSMASettingsWidget* w = qobject_cast<const QSMASettingsWidget*>(settingswidget);
     w->x();
 
-    Quantitative::QSMAQuntitativeMethod::Settings settings;
-    logic->AddQuantitativeMethod(std::make_unique<Quantitative::QSMAQuntitativeMethod>(settings));
+    if (w->useMethod())
+    {
+        Quantitative::QSMAQuntitativeMethod::Settings settings;
+        settings.period = static_cast<unsigned int>(w->periodValue());
+        logic->AddQuantitativeMethod(std::make_unique<Quantitative::QSMAQuntitativeMethod>(settings));
+    }
 }
 
 void MainWindow::ParseWMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)

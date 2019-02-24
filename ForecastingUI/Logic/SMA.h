@@ -12,7 +12,7 @@ namespace Quantitative
 
         struct Settings
         {
-
+            unsigned int period = 0;
         };
 
         QSMAQuntitativeMethod (const Settings& settings)
@@ -24,7 +24,7 @@ namespace Quantitative
         virtual std::vector<float> run(std::vector<float> initVector)
         {
             std::vector<float> resultVector;
-            unsigned int length = 5; // Liczba okresow
+            unsigned int length = m_settings.period; // Liczba okresow
             float sum = 0;
             unsigned int counter = 0;
 

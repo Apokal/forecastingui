@@ -12,3 +12,14 @@ QSMASettingsWidget::~QSMASettingsWidget()
 {
     delete ui;
 }
+
+
+bool QSMASettingsWidget::useMethod() const
+{
+    return ui->useMethodCheckBox->isChecked();
+}
+
+int QSMASettingsWidget::periodValue() const
+{
+    return ui->smaPeriodSpinBox->value();
+}

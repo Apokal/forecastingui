@@ -15,6 +15,9 @@ public:
     explicit QSMASettingsWidget(QWidget *parent = nullptr);
     ~QSMASettingsWidget();
 
+    bool useMethod() const;
+    int periodValue() const;
+
 private:
     Ui::QSMASettingsWidget *ui;
 };
