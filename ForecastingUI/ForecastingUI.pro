@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -39,7 +39,8 @@ SOURCES += \
     qnumbersettingswidget.cpp \
     qsmasettingswidget.cpp \
     qwmasettingswidget.cpp \
-    Logic/modellogic.cpp
+    Logic/modellogic.cpp \
+    qexecutiontimeresults.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -68,7 +69,8 @@ HEADERS += \
     Logic/quantitativemethodbase.h \
     Logic/modellogic.h \
     Logic/file.h \
-    Logic/inputgenerator.h
+    Logic/inputgenerator.h \
+    qexecutiontimeresults.h
 
 FORMS += \
         mainwindow.ui \
@@ -76,7 +78,8 @@ FORMS += \
         qwmasettingswidget.ui \
     qessettingswidget.ui \
     qltpsettingswidget.ui \
-    qnumbersettingswidget.ui
+    qnumbersettingswidget.ui \
+    qexecutiontimeresults.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

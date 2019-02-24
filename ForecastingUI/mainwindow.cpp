@@ -10,6 +10,8 @@
 #include "Logic/ES.h"
 #include "Logic/LTP.h"
 
+#include "qexecutiontimeresults.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -155,4 +157,20 @@ void MainWindow::on_run_Btn_clicked()
     msgBox.setIcon(QMessageBox::Information);
     msgBox.setText(msg.c_str());
     msgBox.exec();
+}
+
+void MainWindow::on_execTimeResults_PushBtn_clicked()
+{
+    if ( !m_exec_times_results_dlg )
+    {
+        m_exec_times_results_dlg = new QExecutionTimeResultsDialog(this);
+    }
+
+    QExecutionTimeResultsDialog* dlg = qobject_cast<QExecutionTimeResultsDialog*>(m_exec_times_results_dlg);
+    auto exec_time = m_logic->execution_time_results();
+    dlg->set_exec_time_results(exec_time);
+
+    dlg->show();
+    dlg->raise();
+    dlg->activateWindow();
 }

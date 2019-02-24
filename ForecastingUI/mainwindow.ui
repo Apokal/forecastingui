@@ -160,7 +160,7 @@
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>77</height>
+            <height>21</height>
            </rect>
           </property>
           <attribute name="label">
@@ -173,7 +173,7 @@
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>77</height>
+            <height>21</height>
            </rect>
           </property>
           <attribute name="label">
@@ -186,7 +186,7 @@
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>77</height>
+            <height>21</height>
            </rect>
           </property>
           <attribute name="label">
@@ -199,7 +199,7 @@
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>77</height>
+            <height>20</height>
            </rect>
           </property>
           <attribute name="label">
@@ -215,6 +215,20 @@
      <widget class="QPushButton" name="run_Btn">
       <property name="text">
        <string>Run</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="execTimeResults_PushBtn">
+      <property name="text">
+       <string>Show execution time results</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="methodsResut_PushBtn">
+      <property name="text">
+       <string>Show methods results</string>
       </property>
      </widget>
     </item>
