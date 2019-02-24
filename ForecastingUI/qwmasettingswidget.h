@@ -15,6 +15,9 @@ public:
     explicit QWMASettingsWidget(QWidget *parent = nullptr);
     ~QWMASettingsWidget();
 
+    bool useMethod() const;
+    std::vector<float> weights() const;
+
 private:
     Ui::QWMASettingsWidget *ui;
 };

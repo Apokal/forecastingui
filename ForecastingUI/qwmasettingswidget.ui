@@ -7,51 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>426</width>
-    <height>172</height>
+    <height>77</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="2">
-    <widget class="QCheckBox" name="checkBox_2">
-     <property name="text">
-      <string>Use field #2</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QDoubleSpinBox" name="weightScheme1_SpinBox"/>
-   </item>
-   <item row="5" column="0">
-    <widget class="QCheckBox" name="checkBox_3">
-     <property name="text">
-      <string>Use field #3</string>
-     </property>
-    </widget>
-   </item>
+  <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
-    <widget class="QCheckBox" name="useMethodCheckBox">
+    <widget class="QCheckBox" name="useMethod_ChkBox">
      <property name="text">
       <string>Use method</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QCheckBox" name="checkBox">
-     <property name="text">
-      <string>Use field #1</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1">
-    <widget class="QDoubleSpinBox" name="weightScheme_5_SpinBox"/>
-   </item>
-   <item row="9" column="0">
-    <widget class="QCheckBox" name="checkBox_7">
-     <property name="text">
-      <string>Use field #7</string>
      </property>
     </widget>
    </item>
@@ -62,41 +28,12 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="0">
-    <widget class="QCheckBox" name="checkBox_5">
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="weightScheme_LnEdit">
      <property name="text">
-      <string>Use field #5</string>
+      <string>0.2;0.3;0.5</string>
      </property>
     </widget>
-   </item>
-   <item row="9" column="1">
-    <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
-   </item>
-   <item row="5" column="1">
-    <widget class="QDoubleSpinBox" name="weightScheme_3_SpinBox"/>
-   </item>
-   <item row="2" column="3">
-    <widget class="QDoubleSpinBox" name="weightScheme_2_SpinBox"/>
-   </item>
-   <item row="5" column="2">
-    <widget class="QCheckBox" name="checkBox_4">
-     <property name="text">
-      <string>Use field #4</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="3">
-    <widget class="QDoubleSpinBox" name="weightScheme_4_SpinBox"/>
-   </item>
-   <item row="7" column="2">
-    <widget class="QCheckBox" name="checkBox_6">
-     <property name="text">
-      <string>Use field #6</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="3">
-    <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
    </item>
   </layout>
  </widget>

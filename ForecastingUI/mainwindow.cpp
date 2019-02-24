@@ -83,11 +83,13 @@ void MainWindow::ParseSMASettingsAndUpdateLogic(const QWidget* settingswidget, s
 void MainWindow::ParseWMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
 {
     const QWMASettingsWidget* w = qobject_cast<const QWMASettingsWidget*>(settingswidget);
-    w->x();
 
-    Quantitative::QWMAQuntitativeMethod::Settings settings;
-    settings.weights = { 0.2f, 0.3f, 0.5f };
-    logic->AddQuantitativeMethod(std::make_unique<Quantitative::QWMAQuntitativeMethod>(settings));
+    if (w->useMethod())
+    {
+        Quantitative::QWMAQuntitativeMethod::Settings settings;
+        settings.weights = w->weights();
+        logic->AddQuantitativeMethod(std::make_unique<Quantitative::QWMAQuntitativeMethod>(settings));
+    }
 }
 
 void MainWindow::ParseESSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
