@@ -105,10 +105,13 @@ void MainWindow::ParseESSettingsAndUpdateLogic(const QWidget* settingswidget, st
 void MainWindow::ParseLTPSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
 {
     const QLTPSettingsWidget* w = qobject_cast<const QLTPSettingsWidget*>(settingswidget);
-    w->x();
 
-    Quantitative::QLTPQuntitativeMethod::Settings settings;
-    logic->AddQuantitativeMethod(std::make_unique<Quantitative::QLTPQuntitativeMethod>(settings));
+    if (w->useMethod())
+    {
+        Quantitative::QLTPQuntitativeMethod::Settings settings;
+        settings.period = static_cast<unsigned int>(w->period());
+        logic->AddQuantitativeMethod(std::make_unique<Quantitative::QLTPQuntitativeMethod>(settings));
+    }
 }
 
 Logic::QRunSettings MainWindow::ParseGeneralSettingsAndUpdateLogic(const QWidget* num_setts_widget)

@@ -12,3 +12,13 @@ QLTPSettingsWidget::~QLTPSettingsWidget()
 {
     delete ui;
 }
+
+bool QLTPSettingsWidget::useMethod() const
+{
+    return ui->useMethod_ChkBox->isChecked();
+}
+
+int QLTPSettingsWidget::period() const
+{
+    return ui->period_SpnBox->value();
+}

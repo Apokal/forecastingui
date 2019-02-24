@@ -15,6 +15,9 @@ public:
     explicit QLTPSettingsWidget(QWidget *parent = nullptr);
     ~QLTPSettingsWidget();
 
+    bool useMethod() const;
+    int period() const;
+
 private:
     Ui::QLTPSettingsWidget *ui;
 };

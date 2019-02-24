@@ -12,7 +12,7 @@ namespace Quantitative
 
         struct Settings
         {
-
+            unsigned int period = 0;
         };
 
         QLTPQuntitativeMethod (const Settings& settings)
@@ -24,7 +24,7 @@ namespace Quantitative
         virtual std::vector<float> run(std::vector<float> initVector)
         {
             std::vector<float> results;
-            unsigned int limit = 10;
+            unsigned int limit = m_settings.period;
             float xSum = 0;
             float ySum = 0;
             float xySum = 0;
