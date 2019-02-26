@@ -23,8 +23,8 @@ namespace Quantitative
 
         virtual std::vector<float> run(std::vector<float> initVector)
         {
-            std::vector<float> results;
-            unsigned int limit = m_settings.period;
+            std::vector<float> resultVector;
+            int period = m_settings.period;;
             float xSum = 0;
             float ySum = 0;
             float xySum = 0;
@@ -32,7 +32,7 @@ namespace Quantitative
 
             std::cout << "Kalkulacja LTP..." << std::endl;
 
-            for (unsigned int i = 0; i < limit; i++) {
+            for (int i = 0; i < period; i++) {
                 xSum += i+1;
                 ySum += initVector[i];
                 xySum += (i + 1) * initVector[i];
@@ -40,22 +40,18 @@ namespace Quantitative
             }
 
             float intercept = ((xSqrSum * ySum) - (xSum * xySum)) /
-                              ((limit * xSqrSum) - (xSum * xSum));
+                              ((period * xSqrSum) - (xSum * xSum));
 
-            float slope = ((limit * xySum) - (xSum * ySum)) /
-                          ((limit * xSqrSum) - (xSum * xSum));
+            float slope = ((period * xySum) - (xSum * ySum)) /
+                          ((period * xSqrSum) - (xSum * xSum));
 
-            for (unsigned int i = 0; i < initVector.size(); i++) {
-                if (i < limit) {
-                    results.push_back(initVector[i]);
-                }
-                else {
-                    float val = intercept + slope * i;
-                    results.push_back(val);
-                }
+            for (int i = 0; i < initVector.size(); i++) {
+                float val = intercept + slope * (i + 1);
+                resultVector.push_back(val);
             }
 
-            return results;
+            std::cout << "Obliczenia LTP sie skonczyly" << std::endl;
+            return resultVector;
         }
 
     private:

@@ -24,19 +24,21 @@ namespace Quantitative
         virtual std::vector<float> run(std::vector<float> initVector)
         {
             std::vector<float> resultVector;
-            unsigned int length = m_settings.period; // Liczba okresow
-            float sum = 0;
-            unsigned int counter = 0;
+            int period = m_settings.period; // How much of InitVector values should be taken as historical data for future forecast
+            double sum = 0;
 
             std::cout << "Kalkulacja SMA..." << std::endl;
 
-            for (unsigned int i = 0; i < initVector.size(); i++) {
-                sum += initVector[i];
-                counter++;
-                if (counter >= length) {
-                    resultVector.push_back(sum / length);
-                    sum -= initVector[counter - length];
+            for (int i = 0; i < period; i++) {
+                resultVector.push_back(initVector[i]);
+            }
+
+            for (int i = 0; i < initVector.size(); i++) {
+                for (int j = 0; j < period; j++) {
+                    sum += resultVector[i + j];
                 }
+                resultVector.push_back(sum / period);
+                sum = 0;
             }
 
             std::cout << "Obliczenia SMA sie skonczyly" << std::endl;

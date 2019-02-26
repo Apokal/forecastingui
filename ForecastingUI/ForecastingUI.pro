@@ -70,7 +70,9 @@ HEADERS += \
     Logic/modellogic.h \
     Logic/file.h \
     Logic/inputgenerator.h \
-    qexecutiontimeresults.h
+    qexecutiontimeresults.h \
+    Logic/LWMA.h \
+    Logic/TMA.h
 
 FORMS += \
         mainwindow.ui \
