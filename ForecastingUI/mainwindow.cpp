@@ -9,6 +9,8 @@
 #include "Logic/WMA.h"
 #include "Logic/ES.h"
 #include "Logic/LTP.h"
+#include "Logic/lwma.h"
+#include "Logic/tma.h"
 
 #include "qexecutiontimeresults.h"
 
@@ -118,6 +120,30 @@ void MainWindow::ParseLTPSettingsAndUpdateLogic(const QWidget* settingswidget, s
     }
 }
 
+void MainWindow::ParseLWMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+{
+    const QLWMASettingsWidget* w = qobject_cast<const QLWMASettingsWidget*>(settingswidget);
+
+    if (w->useMethod())
+    {
+        Quantitative::QLWMAQuntitativeMethod::Settings settings;
+        settings.period = static_cast<unsigned int>(w->period());
+        logic->AddQuantitativeMethod(std::make_unique<Quantitative::QLWMAQuntitativeMethod>(settings));
+    }
+}
+
+void MainWindow::ParseTMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+{
+    const QTMASettingsWidget* w = qobject_cast<const QTMASettingsWidget*>(settingswidget);
+
+    if (w->useMethod())
+    {
+        Quantitative::QTMAQuntitativeMethod::Settings settings;
+        settings.period = static_cast<unsigned int>(w->period());
+        logic->AddQuantitativeMethod(std::make_unique<Quantitative::QTMAQuntitativeMethod>(settings));
+    }
+}
+
 Logic::QRunSettings MainWindow::ParseGeneralSettingsAndUpdateLogic(const QWidget* num_setts_widget)
 {
     const auto* w = qobject_cast<const QNumberSettingsWidget*>(num_setts_widget);
@@ -141,6 +167,8 @@ void MainWindow::on_run_Btn_clicked()
     ParseWMASettingsAndUpdateLogic(ui->PageWMA, m_logic);
     ParseESSettingsAndUpdateLogic(ui->PageES, m_logic);
     ParseLTPSettingsAndUpdateLogic(ui->PageLTP, m_logic);
+    ParseLWMASettingsAndUpdateLogic(ui->PageLWMA, m_logic);
+    ParseTMASettingsAndUpdateLogic(ui->PageTMA, m_logic);
     auto runsetts = ParseGeneralSettingsAndUpdateLogic(ui->numberSettings_Wdgt);
 
     m_logic->Run(runsetts);

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QLTPSettingsWidget</class>
- <widget class="QWidget" name="QLTPSettingsWidget">
+ <class>QTMASettingsWidget</class>
+ <widget class="QWidget" name="QTMASettingsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>74</height>
+    <height>73</height>
    </rect>
   </property>
   <property name="windowTitle">

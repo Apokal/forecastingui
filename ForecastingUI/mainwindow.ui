@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>516</height>
+    <height>620</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -152,7 +152,7 @@
        <item>
         <widget class="QToolBox" name="toolBox">
          <property name="currentIndex">
-          <number>3</number>
+          <number>5</number>
          </property>
          <widget class="QSMASettingsWidget" name="PageSMA">
           <property name="geometry">
@@ -160,7 +160,7 @@
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>21</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -173,7 +173,7 @@
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>21</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -186,7 +186,7 @@
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>21</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -199,11 +199,21 @@
             <x>0</x>
             <y>0</y>
             <width>602</width>
-            <height>20</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
            <string>LTP</string>
+          </attribute>
+         </widget>
+         <widget class="QLWMASettingsWidget" name="PageLWMA">
+          <attribute name="label">
+           <string>LWMA</string>
+          </attribute>
+         </widget>
+         <widget class="QTMASettingsWidget" name="PageTMA">
+          <attribute name="label">
+           <string>TMA</string>
           </attribute>
          </widget>
         </widget>
@@ -284,6 +294,18 @@
    <class>QNumberSettingsWidget</class>
    <extends>QWidget</extends>
    <header location="global">qnumbersettingswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QLWMASettingsWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">qlwmasettingswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QTMASettingsWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">qtmasettingswidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -12,7 +12,7 @@ namespace Quantitative
 
         struct Settings
         {
-            float period = 0.0f;
+            int period = 0;
         };
 
         QTMAQuntitativeMethod (const Settings& settings)
