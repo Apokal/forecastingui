@@ -153,9 +153,18 @@ Logic::QRunSettings MainWindow::ParseGeneralSettingsAndUpdateLogic(const QWidget
     setts.inputsize = static_cast<size_t>(ui->genInputSize_SpBox->value());
     setts.output_dir = ui->outputFilePath_LnEdit->text().toStdString();
 
-    setts.precision = static_cast<unsigned int>(ui->numberSettings_Wdgt->precision());
-    setts.min_value = ui->numberSettings_Wdgt->min_value();
-    setts.max_value = ui->numberSettings_Wdgt->max_value();
+    setts.use_custom_file = ui->customFile_RadBtn->isChecked();
+
+    if( setts.use_custom_file)
+    {
+        setts.custom_file_path = ui->customFilePath_LnEdit->text().toStdString();
+    }
+    else
+    {
+        setts.precision = static_cast<unsigned int>(ui->numberSettings_Wdgt->precision());
+        setts.min_value = ui->numberSettings_Wdgt->min_value();
+        setts.max_value = ui->numberSettings_Wdgt->max_value();
+    }
 
     return setts;
 }
