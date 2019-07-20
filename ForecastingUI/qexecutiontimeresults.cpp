@@ -6,6 +6,7 @@ QExecutionTimeResultsDialog::QExecutionTimeResultsDialog(QWidget *parent) :
     ui(new Ui::QExecutionTimeResults)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
 }
 
 QExecutionTimeResultsDialog::~QExecutionTimeResultsDialog()

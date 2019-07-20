@@ -12,6 +12,8 @@
 #include "Logic/lwma.h"
 #include "Logic/tma.h"
 
+#include "Logic/file.h"
+
 #include "qexecutiontimeresults.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -71,7 +73,7 @@ void MainWindow::on_outputFilePath_Btn_clicked()
     }
 }
 
-void MainWindow::ParseSMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+void MainWindow::ParseSMASettingsAndUpdateLogic(const QWidget* settingswidget, const Logic::QRunSettings& runsettings, std::unique_ptr<Logic::QModelLogic>& logic)
 {
     const QSMASettingsWidget* w = qobject_cast<const QSMASettingsWidget*>(settingswidget);
     w->x();
@@ -79,7 +81,7 @@ void MainWindow::ParseSMASettingsAndUpdateLogic(const QWidget* settingswidget, s
     if (w->useMethod())
     {
         Quantitative::QSMAQuntitativeMethod::Settings settings;
-        settings.period = static_cast<unsigned int>(w->periodValue());
+        settings.period = runsettings.use_custom_file ? static_cast<unsigned int>(runsettings.inputsize) : static_cast<unsigned int>(w->periodValue());
         logic->AddQuantitativeMethod(std::make_unique<Quantitative::QSMAQuntitativeMethod>(settings));
     }
 }
@@ -108,38 +110,38 @@ void MainWindow::ParseESSettingsAndUpdateLogic(const QWidget* settingswidget, st
     }
 }
 
-void MainWindow::ParseLTPSettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+void MainWindow::ParseLTPSettingsAndUpdateLogic(const QWidget* settingswidget, const Logic::QRunSettings& runsettings, std::unique_ptr<Logic::QModelLogic>& logic)
 {
     const QLTPSettingsWidget* w = qobject_cast<const QLTPSettingsWidget*>(settingswidget);
 
     if (w->useMethod())
     {
         Quantitative::QLTPQuntitativeMethod::Settings settings;
-        settings.period = static_cast<unsigned int>(w->period());
+        settings.period = runsettings.use_custom_file ? static_cast<unsigned int>(runsettings.inputsize) : static_cast<unsigned int>(w->period());
         logic->AddQuantitativeMethod(std::make_unique<Quantitative::QLTPQuntitativeMethod>(settings));
     }
 }
 
-void MainWindow::ParseLWMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+void MainWindow::ParseLWMASettingsAndUpdateLogic(const QWidget* settingswidget, const Logic::QRunSettings& runsettings, std::unique_ptr<Logic::QModelLogic>& logic)
 {
     const QLWMASettingsWidget* w = qobject_cast<const QLWMASettingsWidget*>(settingswidget);
 
     if (w->useMethod())
     {
         Quantitative::QLWMAQuntitativeMethod::Settings settings;
-        settings.period = static_cast<unsigned int>(w->period());
+        settings.period = runsettings.use_custom_file ? static_cast<int>(runsettings.inputsize) : static_cast<unsigned int>(w->period());
         logic->AddQuantitativeMethod(std::make_unique<Quantitative::QLWMAQuntitativeMethod>(settings));
     }
 }
 
-void MainWindow::ParseTMASettingsAndUpdateLogic(const QWidget* settingswidget, std::unique_ptr<Logic::QModelLogic>& logic)
+void MainWindow::ParseTMASettingsAndUpdateLogic(const QWidget* settingswidget, const Logic::QRunSettings& runsettings, std::unique_ptr<Logic::QModelLogic>& logic)
 {
     const QTMASettingsWidget* w = qobject_cast<const QTMASettingsWidget*>(settingswidget);
 
     if (w->useMethod())
     {
         Quantitative::QTMAQuntitativeMethod::Settings settings;
-        settings.period = static_cast<unsigned int>(w->period());
+        settings.period = runsettings.use_custom_file ? static_cast<int>(runsettings.inputsize) : static_cast<unsigned int>(w->period());
         logic->AddQuantitativeMethod(std::make_unique<Quantitative::QTMAQuntitativeMethod>(settings));
     }
 }
@@ -172,13 +174,20 @@ Logic::QRunSettings MainWindow::ParseGeneralSettingsAndUpdateLogic(const QWidget
 void MainWindow::on_run_Btn_clicked()
 {
     m_logic->ClearMethods();
-    ParseSMASettingsAndUpdateLogic(ui->PageSMA, m_logic);
+
+    auto runsetts = ParseGeneralSettingsAndUpdateLogic(ui->numberSettings_Wdgt);
+    if ( runsetts.use_custom_file )
+    {
+        runsetts.init_vector = read_custom_file(runsetts.custom_file_path);
+        runsetts.inputsize = runsetts.init_vector.size();
+    }
+
+    ParseSMASettingsAndUpdateLogic(ui->PageSMA, runsetts, m_logic);
     ParseWMASettingsAndUpdateLogic(ui->PageWMA, m_logic);
     ParseESSettingsAndUpdateLogic(ui->PageES, m_logic);
-    ParseLTPSettingsAndUpdateLogic(ui->PageLTP, m_logic);
-    ParseLWMASettingsAndUpdateLogic(ui->PageLWMA, m_logic);
-    ParseTMASettingsAndUpdateLogic(ui->PageTMA, m_logic);
-    auto runsetts = ParseGeneralSettingsAndUpdateLogic(ui->numberSettings_Wdgt);
+    ParseLTPSettingsAndUpdateLogic(ui->PageLTP, runsetts, m_logic);
+    ParseLWMASettingsAndUpdateLogic(ui->PageLWMA, runsetts, m_logic);
+    ParseTMASettingsAndUpdateLogic(ui->PageTMA, runsetts, m_logic);
 
     m_logic->Run(runsetts);
 
@@ -200,11 +209,7 @@ void MainWindow::on_run_Btn_clicked()
 
 void MainWindow::on_execTimeResults_PushBtn_clicked()
 {
-    if ( !m_exec_times_results_dlg )
-    {
-        m_exec_times_results_dlg = new QExecutionTimeResultsDialog(this);
-    }
-
+    m_exec_times_results_dlg = new QExecutionTimeResultsDialog();
     QExecutionTimeResultsDialog* dlg = qobject_cast<QExecutionTimeResultsDialog*>(m_exec_times_results_dlg);
     auto exec_time = m_logic->execution_time_results();
     dlg->set_exec_time_results(exec_time);

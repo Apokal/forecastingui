@@ -31,7 +31,7 @@ namespace Logic
         m_quant_methods.push_back(std::move(pmethod));
     }
 
-    void QModelLogic::Run(const QRunSettings& settings)
+    void QModelLogic::Run(QRunSettings settings)
     {
         std::vector<float> initVector;
 
@@ -41,14 +41,10 @@ namespace Logic
             output_dir.mkdir(settings.output_dir.c_str());
         }
 
-        if ( settings.use_custom_file )
-        {
-            initVector = read_custom_file(settings.custom_file_path);
-        }
-        else
+        if ( !settings.use_custom_file )
         {
             QInputGenerator gen;
-            initVector = gen.generate(settings.inputsize, settings.min_value, settings.max_value, settings.precision);
+            settings.init_vector = gen.generate(settings.inputsize, settings.min_value, settings.max_value, settings.precision);
             auto filepath = settings.output_dir + "/initVector.txt";
             write_to_file(filepath, initVector);
         }
@@ -56,7 +52,7 @@ namespace Logic
         m_quant_meths_exec_time.clear();
         for (const auto& p : m_quant_methods)
         {
-            auto exec_time = ExecuteMethod(p.get(), initVector, settings.output_dir);
+            auto exec_time = ExecuteMethod(p.get(), settings.init_vector, settings.output_dir);
             m_quant_meths_exec_time[p->name()] = exec_time;
         }
     }

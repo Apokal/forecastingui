@@ -19,6 +19,7 @@ namespace Logic
     {
         bool use_custom_file = false;
         std::string custom_file_path;
+        std::vector<float> init_vector;
 
         size_t inputsize = 0;
 
@@ -35,7 +36,7 @@ namespace Logic
         QModelLogic();
 
         void AddQuantitativeMethod(QuantitativeMethodPtr pmethod);
-        void Run(const QRunSettings& settings);
+        void Run(QRunSettings settings);
         QuantativeMethodsExecutionTime execution_time_results();
         void ClearMethods();
 

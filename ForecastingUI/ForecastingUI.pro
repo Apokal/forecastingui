@@ -42,7 +42,8 @@ SOURCES += \
     Logic/modellogic.cpp \
     qexecutiontimeresults.cpp \
     qlwmasettingswidget.cpp \
-    qtmasettingswidget.cpp
+    qtmasettingswidget.cpp \
+    Logic/file.cpp
 
 HEADERS += \
         mainwindow.h \
