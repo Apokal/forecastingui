@@ -1,4 +1,4 @@
-#include "qexecutiontimeresults.h"
+#include "qexecutiontimeresultswidget.h"
 #include "ui_qexecutiontimeresults.h"
 
 QExecutionTimeResultsDialog::QExecutionTimeResultsDialog(QWidget *parent) :

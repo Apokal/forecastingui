@@ -12,7 +12,13 @@ namespace Quantitative {
 
 namespace Logic
 {
-    using QuantativeMethodsExecutionTime = std::map<std::string, std::chrono::milliseconds>;
+    struct QQuantativeMethodResult
+    {
+        std::chrono::milliseconds exec_time;
+        std::vector<float> output;
+    };
+
+    using QQuantativeMethodResults = std::map<std::string, QQuantativeMethodResult>;
     using QuantitativeMethodPtr = std::unique_ptr<Quantitative::QQuantitativeMethodBase>;
 
     struct QRunSettings
@@ -37,14 +43,14 @@ namespace Logic
 
         void AddQuantitativeMethod(QuantitativeMethodPtr pmethod);
         void Run(QRunSettings settings);
-        QuantativeMethodsExecutionTime execution_time_results();
+        const QQuantativeMethodResults &method_results();
         void ClearMethods();
 
     private:
-        std::chrono::milliseconds ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string &output_dir);
+        QQuantativeMethodResult ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string &output_dir);
 
         std::vector<QuantitativeMethodPtr>  m_quant_methods;
-        QuantativeMethodsExecutionTime      m_quant_meths_exec_time;
+        QQuantativeMethodResults            m_quant_meths_results;
     };
 
 }

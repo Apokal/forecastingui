@@ -14,7 +14,8 @@
 
 #include "Logic/file.h"
 
-#include "qexecutiontimeresults.h"
+#include "qexecutiontimeresultswidget.h"
+#include "qmethodsresultswidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -191,13 +192,13 @@ void MainWindow::on_run_Btn_clicked()
 
     m_logic->Run(runsetts);
 
-    auto exec_time = m_logic->execution_time_results();
+    const auto& method_results = m_logic->method_results();
 
     std::cout << "-------------------" << std::endl;
     std::cout << "Czas wykonywania (ms): " << std::endl;
-    for ( const auto& p : exec_time )
+    for ( const auto& p : method_results )
     {
-        std::string msg = p.first + ": " + std::to_string(p.second.count());
+        std::string msg = p.first + ": " + std::to_string(p.second.exec_time.count());
         std::cout << msg << std::endl;
     }
 
@@ -211,8 +212,35 @@ void MainWindow::on_execTimeResults_PushBtn_clicked()
 {
     m_exec_times_results_dlg = new QExecutionTimeResultsDialog();
     QExecutionTimeResultsDialog* dlg = qobject_cast<QExecutionTimeResultsDialog*>(m_exec_times_results_dlg);
-    auto exec_time = m_logic->execution_time_results();
+    const auto& method_results = m_logic->method_results();
+
+    std::map<std::string, std::chrono::milliseconds> exec_time;
+    for(const auto& r : method_results)
+    {
+        exec_time[r.first] = r.second.exec_time;
+    }
+
     dlg->set_exec_time_results(exec_time);
+
+    dlg->show();
+    dlg->raise();
+    dlg->activateWindow();
+}
+
+void MainWindow::on_methodsResut_PushBtn_clicked()
+{
+    m_method_results_dlg = new QMethodsResultsDialog();
+    QMethodsResultsDialog* dlg = qobject_cast<QMethodsResultsDialog*>(m_method_results_dlg);
+
+    const auto& method_results = m_logic->method_results();
+
+    std::map<std::string, std::vector<float>> methods_output;
+    for(const auto& r : method_results)
+    {
+        methods_output[r.first] = r.second.output;
+    }
+
+    dlg->set_method_results(methods_output);
 
     dlg->show();
     dlg->raise();

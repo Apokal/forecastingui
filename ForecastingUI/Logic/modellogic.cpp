@@ -49,17 +49,17 @@ namespace Logic
             write_to_file(filepath, initVector);
         }
 
-        m_quant_meths_exec_time.clear();
+        m_quant_meths_results.clear();
         for (const auto& p : m_quant_methods)
         {
-            auto exec_time = ExecuteMethod(p.get(), settings.init_vector, settings.output_dir);
-            m_quant_meths_exec_time[p->name()] = exec_time;
+            auto result = ExecuteMethod(p.get(), settings.init_vector, settings.output_dir);
+            m_quant_meths_results[p->name()] = result;
         }
     }
 
-    QuantativeMethodsExecutionTime QModelLogic::execution_time_results()
+    const QQuantativeMethodResults& QModelLogic::method_results()
     {
-        return m_quant_meths_exec_time;
+        return m_quant_meths_results;
     }
 
     void QModelLogic::ClearMethods()
@@ -67,21 +67,21 @@ namespace Logic
         m_quant_methods.clear();
     }
 
-    std::chrono::milliseconds QModelLogic::ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string& output_dir)
+    QQuantativeMethodResult QModelLogic::ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string& output_dir)
     {
-        std::vector<float> resultVector;
+        std::vector<float> output_vector;
 
         using Clock = std::chrono::high_resolution_clock;
         auto t_start = Clock::now();
 
-        resultVector = pmethod->run(initVector);
+        output_vector = pmethod->run(initVector);
 
         auto currdir = QDir::currentPath();
         auto filepath = output_dir + "/" + pmethod->name() + ".txt";
-        write_to_file(filepath, resultVector);
+        write_to_file(filepath, output_vector);
 
         auto t_end = Clock::now();
 
-        return std::chrono::duration_cast<std::chrono::milliseconds>(t_end - t_start);
+        return { std::chrono::duration_cast<std::chrono::milliseconds>(t_end - t_start), output_vector };
     }
 }

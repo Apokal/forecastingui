@@ -40,10 +40,11 @@ SOURCES += \
     qsmasettingswidget.cpp \
     qwmasettingswidget.cpp \
     Logic/modellogic.cpp \
-    qexecutiontimeresults.cpp \
     qlwmasettingswidget.cpp \
     qtmasettingswidget.cpp \
-    Logic/file.cpp
+    Logic/file.cpp \
+    qmethodsresultswidget.cpp \
+    qexecutiontimeresultswidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -73,11 +74,12 @@ HEADERS += \
     Logic/modellogic.h \
     Logic/file.h \
     Logic/inputgenerator.h \
-    qexecutiontimeresults.h \
     Logic/LWMA.h \
     Logic/TMA.h \
     qlwmasettingswidget.h \
-    qtmasettingswidget.h
+    qtmasettingswidget.h \
+    qmethodsresultswidget.h \
+    qexecutiontimeresultswidget.h
 
 FORMS += \
         mainwindow.ui \
@@ -88,7 +90,8 @@ FORMS += \
     qnumbersettingswidget.ui \
     qexecutiontimeresults.ui \
     qlwmasettingswidget.ui \
-    qtmasettingswidget.ui
+    qtmasettingswidget.ui \
+    qmethodsresults.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

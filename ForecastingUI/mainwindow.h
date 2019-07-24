@@ -38,11 +38,14 @@ private slots:
 
     void on_execTimeResults_PushBtn_clicked();
 
+    void on_methodsResut_PushBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<Logic::QModelLogic> m_logic;
 
     QDialog* m_exec_times_results_dlg = nullptr;
+    QDialog* m_method_results_dlg = nullptr;
 };
 
 #endif // MAINWINDOW_H
