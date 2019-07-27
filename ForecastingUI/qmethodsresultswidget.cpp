@@ -36,9 +36,9 @@ void QMethodsResultsDialog::build_chart()
         QSplineSeries  *series = new QSplineSeries ();
         series->setName(r.first.c_str());
 
-        for ( size_t i = 0; i < 30/*r.second.size()*/; ++i)
+        for ( size_t i = 0; i < r.second.size(); ++i)
         {
-            std::cout << i << ": " << r.second[i] << std::endl;
+            //std::cout << i << ": " << r.second[i] << std::endl;
             series->append(static_cast<qreal>(i), static_cast<qreal>(r.second[i]));
         }
 
