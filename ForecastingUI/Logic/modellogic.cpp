@@ -52,7 +52,7 @@ namespace Logic
         m_quant_meths_results.clear();
         for (const auto& p : m_quant_methods)
         {
-            auto result = ExecuteMethod(p.get(), settings.init_vector, settings.output_dir);
+            auto result = ExecuteMethod(p.get(), settings.init_vector, settings.output_dir, settings.forecast_range);
             m_quant_meths_results[p->name()] = result;
         }
     }
@@ -67,14 +67,14 @@ namespace Logic
         m_quant_methods.clear();
     }
 
-    QQuantativeMethodResult QModelLogic::ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string& output_dir)
+    QQuantativeMethodResult QModelLogic::ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string& output_dir, size_t forecast_range)
     {
         std::vector<float> output_vector;
 
         using Clock = std::chrono::high_resolution_clock;
         auto t_start = Clock::now();
 
-        output_vector = pmethod->run(initVector);
+        output_vector = pmethod->run(initVector, forecast_range);
 
         auto currdir = QDir::currentPath();
         auto filepath = output_dir + "/" + pmethod->name() + ".txt";

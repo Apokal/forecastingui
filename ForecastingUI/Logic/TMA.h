@@ -21,7 +21,7 @@ namespace Quantitative
         {}
         virtual ~QTMAQuntitativeMethod() {}
 
-        virtual std::vector<float> run(std::vector<float> initVector)
+        virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range)
         {
             std::vector<float> resultSMAVector;
             std::vector<float> resultTMAVector;

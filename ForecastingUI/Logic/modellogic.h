@@ -48,7 +48,7 @@ namespace Logic
         void ClearMethods();
 
     private:
-        QQuantativeMethodResult ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string &output_dir);
+        QQuantativeMethodResult ExecuteMethod(Quantitative::QQuantitativeMethodBase* pmethod, std::vector<float> initVector, const std::string &output_dir, size_t forecast_range);
 
         std::vector<QuantitativeMethodPtr>  m_quant_methods;
         QQuantativeMethodResults            m_quant_meths_results;

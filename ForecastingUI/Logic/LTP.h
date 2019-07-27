@@ -21,7 +21,7 @@ namespace Quantitative
         {}
         virtual ~QLTPQuntitativeMethod() {}
 
-        virtual std::vector<float> run(std::vector<float> initVector)
+        virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range)
         {
             std::vector<float> resultVector;
             int period = m_settings.period;;

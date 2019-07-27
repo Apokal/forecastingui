@@ -21,32 +21,36 @@ namespace Quantitative
         {}
         virtual ~QSMAQuntitativeMethod() {}
 
-        virtual std::vector<float> run(std::vector<float> initVector)
+        virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range)
         {
             std::vector<float> resultVector;
-            // Number of forecasted values
-            int numForFutureForecast = 3;
-            // Number of previous values taken for one new forecast
-            int period = m_settings.period;
+
+            int period = m_settings.period;                     // Number of previous values taken for one new forecast
 
             double sum = 0;
 
             std::cout << "Kalkulacja SMA..." << std::endl;
-
-            for (int i = initVector.size() - period; i < initVector.size(); i++) {
-                resultVector.push_back(initVector[i]);
+            if ( initVector.size() < period )
+            {
+                std::cout << "Uwaga! Wartosc [period] jest wieksza za rozmiar danych wejscowych" << std::endl;
             }
-
-            for (int i = 0; i < numForFutureForecast; i++) {
-                for (int j = 0; j < period ; j++) {
-                    sum += resultVector[i + j];
+            else
+            {
+                for (int i = initVector.size() - period; i < initVector.size(); i++) {
+                    resultVector.push_back(initVector[i]);
                 }
-                auto avg = sum / period;
-                resultVector.push_back(avg);
-                sum = 0;
+
+                for (int i = 0; i < forecast_range; i++) {
+                    for (int j = 0; j < period ; j++) {
+                        sum += resultVector[i + j];
+                    }
+                    auto avg = sum / period;
+                    resultVector.push_back(avg);
+                    sum = 0;
+                }
+                std::cout << "Obliczenia SMA sie skonczyly" << std::endl;
             }
 
-            std::cout << "Obliczenia SMA sie skonczyly" << std::endl;
             return resultVector;
         }
 
