@@ -33,6 +33,7 @@ namespace Logic
         float max_value = 0.0f;
         unsigned int precision = 0;
 
+        size_t forecast_range = 0;
         std::string output_dir;
     };
 
