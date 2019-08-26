@@ -155,6 +155,7 @@ Logic::QRunSettings MainWindow::ParseGeneralSettingsAndUpdateLogic(const QWidget
     Logic::QRunSettings setts;
     setts.inputsize = static_cast<size_t>(ui->genInputSize_SpBox->value());
     setts.output_dir = ui->outputFilePath_LnEdit->text().toStdString();
+    setts.forecast_range = static_cast<size_t>(ui->forecastRange_spBox->value());
 
     setts.use_custom_file = ui->customFile_RadBtn->isChecked();
 

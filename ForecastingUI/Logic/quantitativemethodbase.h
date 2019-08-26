@@ -15,7 +15,7 @@ namespace Quantitative
 
             virtual ~QQuantitativeMethodBase() { }
 
-            virtual std::vector<float> run(std::vector<float> initVector) = 0;
+            virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range) = 0;
 
             const std::string& name() { return m_name; }
 

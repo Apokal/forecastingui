@@ -20,7 +20,7 @@ namespace Quantitative
         {}
         virtual ~QWMAQuntitativeMethod() {}
 
-        virtual std::vector<float> run(std::vector<float> initVector)
+        virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range)
         {
             std::vector<float> resultVector;
             std::vector<float> weights = m_settings.weights;

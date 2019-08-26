@@ -21,9 +21,10 @@ namespace Quantitative
         {}
         virtual ~QSMAQuntitativeMethod() {}
 
-        virtual std::vector<float> run(std::vector<float> initVector)
+        virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range)
         {
             std::vector<float> resultVector;
+
             // Number of previous values taken for one new forecast
             // int historicalData = m_settings.period;
             int historicalData = 60;
@@ -34,7 +35,8 @@ namespace Quantitative
 
             std::cout << "Kalkulacja SMA..." << std::endl;
 
-            for (int i = 0; i < numForFutureForecast; i++) {
+            for (int i = 0; i < numForFutureForecast; i++)
+            {
                 float sum = 0;
                 int x = 0;
 
@@ -46,9 +48,11 @@ namespace Quantitative
                 auto avg = sum / historicalData;
                 resultVector.push_back(avg);
                 initVector.push_back(avg);
+
             }
 
             std::cout << "Obliczenia SMA sie skonczyly" << std::endl;
+
             return resultVector;
         }
 

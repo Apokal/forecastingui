@@ -21,7 +21,7 @@ namespace Quantitative
         {}
         virtual ~QLWMAQuntitativeMethod() {}
 
-        virtual std::vector<float> run(std::vector<float> initVector)
+        virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range)
         {
             std::vector<float> resultVector;
             // Number of previous values taken for one new forecast
