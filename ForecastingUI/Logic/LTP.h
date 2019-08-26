@@ -24,7 +24,15 @@ namespace Quantitative
         virtual std::vector<float> run(std::vector<float> initVector)
         {
             std::vector<float> resultVector;
-            int period = m_settings.period;;
+
+            // Number of previous values taken for one new forecast
+            // int historicalData = m_settings.period;
+            int historicalData = 60;
+
+            // Number of values in future forecast
+            // int numForFutureForecast = m_settings.numForFutureForecast;
+            int numForFutureForecast = 30;
+
             float xSum = 0;
             float ySum = 0;
             float xySum = 0;
@@ -32,7 +40,9 @@ namespace Quantitative
 
             std::cout << "Kalkulacja LTP..." << std::endl;
 
-            for (int i = 0; i < period; i++) {
+            for (int i = initVector.size() - historicalData; i < initVector.size(); i++) {
+                //resultVector.push_back(initVector[i]);
+
                 xSum += i+1;
                 ySum += initVector[i];
                 xySum += (i + 1) * initVector[i];
@@ -40,13 +50,13 @@ namespace Quantitative
             }
 
             float intercept = ((xSqrSum * ySum) - (xSum * xySum)) /
-                              ((period * xSqrSum) - (xSum * xSum));
+                              ((historicalData * xSqrSum) - (xSum * xSum));
 
-            float slope = ((period * xySum) - (xSum * ySum)) /
-                          ((period * xSqrSum) - (xSum * xSum));
+            float slope = ((historicalData * xySum) - (xSum * ySum)) /
+                          ((historicalData * xSqrSum) - (xSum * xSum));
 
-            for (int i = 0; i < initVector.size(); i++) {
-                float val = intercept + slope * (i + 1);
+            for (int i = 1; i < numForFutureForecast + 1; i++) {
+                float val = intercept + slope * i;
                 resultVector.push_back(val);
             }
 

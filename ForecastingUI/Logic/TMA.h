@@ -25,35 +25,45 @@ namespace Quantitative
         {
             std::vector<float> resultSMAVector;
             std::vector<float> resultTMAVector;
-            int period = m_settings.period;
-            double sum = 0;
+
+            // Number of previous values taken for one new forecast
+            // int historicalData = m_settings.period;
+            int historicalData = 60;
+
+            // Number of values in future forecast
+            // int numForFutureForecast = m_settings.numForFutureForecast;
+            int numForFutureForecast = 30;
 
             std::cout << "Kalkulacja TMA..." << std::endl;
-            // first call SMA on initVector to fill resultVector
-            for (int i = 0; i < initVector.size(); i++) {
-                if (i < period) {
-                    resultSMAVector.push_back(initVector[i]);
-                }
-                else {
-                    resultSMAVector.push_back(sum / period);
-                    sum -= initVector[i - period];
+
+            for (int i = 0; i < numForFutureForecast; i++) {
+                float sum = 0;
+                int x = 0;
+
+                for (int j = initVector.size() - historicalData + i; j < initVector.size() + i; j++) {
+                    sum += initVector[initVector.size() - historicalData + x];
+                    x++;
                 }
 
-                sum += initVector[i];
+                auto avg = sum / historicalData;
+                resultSMAVector.push_back(avg);
+                initVector.push_back(avg);
             }
 
-            // then call SMA again but now on resultVector
-            sum = 0;
-            for (int i = 0; i < resultSMAVector.size(); i++) {
-                if (i < period) {
-                    resultTMAVector.push_back(resultSMAVector[i]);
-                }
-                else {
-                    resultTMAVector.push_back(sum / period);
-                    sum -= resultSMAVector[i - period];
+            int x = 0;
+            for (int i = 0; i < numForFutureForecast; i++) {
+                float sum = 0;
+
+                for(int i = 0 + x; i < resultSMAVector.size(); i++) {
+                    sum += resultSMAVector[i];
                 }
 
-                sum += resultSMAVector[i];
+                sum = sum / (resultSMAVector.size() - x);
+                x++;
+
+                resultTMAVector.push_back(sum);
+                resultSMAVector.push_back(sum);
+
             }
 
             std::cout << "Obliczenia TMA sie skonczyly" << std::endl;

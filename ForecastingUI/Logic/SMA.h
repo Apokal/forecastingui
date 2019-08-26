@@ -24,26 +24,28 @@ namespace Quantitative
         virtual std::vector<float> run(std::vector<float> initVector)
         {
             std::vector<float> resultVector;
-            // Number of forecasted values
-            int numForFutureForecast = 3;
             // Number of previous values taken for one new forecast
-            int period = m_settings.period;
+            // int historicalData = m_settings.period;
+            int historicalData = 60;
 
-            double sum = 0;
+            // Number of values in future forecast
+            // int numForFutureForecast = m_settings.numForFutureForecast;
+            int numForFutureForecast = 30;
 
             std::cout << "Kalkulacja SMA..." << std::endl;
 
-            for (int i = initVector.size() - period; i < initVector.size(); i++) {
-                resultVector.push_back(initVector[i]);
-            }
-
             for (int i = 0; i < numForFutureForecast; i++) {
-                for (int j = 0; j < period ; j++) {
-                    sum += resultVector[i + j];
+                float sum = 0;
+                int x = 0;
+
+                for (int j = initVector.size() - historicalData + i; j < initVector.size() + i; j++) {
+                    sum += initVector[initVector.size() - historicalData + x];
+                    x++;
                 }
-                auto avg = sum / period;
+
+                auto avg = sum / historicalData;
                 resultVector.push_back(avg);
-                sum = 0;
+                initVector.push_back(avg);
             }
 
             std::cout << "Obliczenia SMA sie skonczyly" << std::endl;

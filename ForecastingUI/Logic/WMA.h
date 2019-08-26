@@ -24,27 +24,30 @@ namespace Quantitative
         {
             std::vector<float> resultVector;
             std::vector<float> weights = m_settings.weights;
-            float sum = 0;
-            unsigned int period = static_cast<unsigned int>(weights.size());
+
+            // Number of previous values taken for one new forecast
+            unsigned int historicalData = static_cast<unsigned int>(weights.size());
+
+            // Number of values in future forecast
+            // int numForFutureForecast = m_settings.numForFutureForecast;
+            unsigned int numForFutureForecast = 30;
 
             std::cout << "Kalkulacja WMA..." << std::endl;
 
-            for (unsigned int i = 0; i < initVector.size(); i++)
-            {
-                resultVector.push_back(initVector[i]);
-            }
+            for (unsigned int i = 0; i < numForFutureForecast; i++) {
+                float sum = 0;
+                int x = 0;
 
-            for (unsigned int i = 0; i < initVector.size(); i++)
-            {
-                for (unsigned int j = 0; j < period; j++)
-                {
-                    sum += resultVector[i + j] * weights[j];
+                for (int j = initVector.size() - historicalData + i; j < initVector.size() + i; j++) {
+                    sum += initVector[initVector.size() - historicalData + x] * weights[x];
+                    x++;
                 }
 
                 resultVector.push_back(sum);
-                sum = 0;
+                initVector.push_back(sum);
             }
 
+            std::cout << "Obliczenia WMA sie skonczyly" << std::endl;
             return resultVector;
         }
 
