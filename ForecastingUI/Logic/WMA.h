@@ -20,7 +20,7 @@ namespace Quantitative
         {}
         virtual ~QWMAQuntitativeMethod() {}
 
-        virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range)
+        virtual std::vector<float> run(std::vector<float> initVector, size_t history_range, size_t forecast_range)
         {
             std::vector<float> resultVector;
             std::vector<float> weights = m_settings.weights;
@@ -29,8 +29,7 @@ namespace Quantitative
             unsigned int historicalData = static_cast<unsigned int>(weights.size());
 
             // Number of values in future forecast
-            // int numForFutureForecast = m_settings.numForFutureForecast;
-            unsigned int numForFutureForecast = 30;
+            size_t numForFutureForecast = forecast_range;
 
             std::cout << "Kalkulacja WMA..." << std::endl;
 

@@ -21,21 +21,24 @@ namespace Quantitative
         {}
         virtual ~QESQuntitativeMethod() {}
 
-        virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range)
+        virtual std::vector<float> run(std::vector<float> initVector, size_t history_range, size_t forecast_range)
         {
+            std::cout << "Kalkulacja WMA..." << std::endl;
+
             std::vector<float> resultVector;
             float weightValue = m_settings.smoothConstant;
+            std::cout << "weightValue: " << weightValue << std::endl;
 
             // Number of previous values taken for one new forecast
-            // int historicalData = m_settings.period;
-            int historicalData = 60;
+            size_t historicalData = history_range;
+            std::cout << "historicalData: " << history_range << std::endl;
 
             // Number of values in future forecast
-            // int numForFutureForecast = m_settings.numForFutureForecast;
-            int numForFutureForecast = 30;
+            size_t numForFutureForecast = forecast_range;
+            std::cout << "numForFutureForecast: " << forecast_range << std::endl;
 
             // initVectorSize in the beginning of algorithm
-            int startInitVectorSize = initVector.size();
+            size_t startInitVectorSize = initVector.size();
 
             std::cout << "Kalkulacja ES...." << std::endl;
 

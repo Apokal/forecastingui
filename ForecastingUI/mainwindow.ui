@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>644</height>
+    <height>670</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,9 +28,67 @@
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="5" column="0">
+        <widget class="QLabel" name="forecastRange_Label">
+         <property name="text">
+          <string>Forecacst range (num. of elements):</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QSpinBox" name="forecastRange_spBox">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>100000</number>
+         </property>
+         <property name="value">
+          <number>30</number>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
           <string>Ścieżka do katalogu wyjściowego:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="Line" name="line_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QPushButton" name="customFilePath_Btn">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="outputFilePath_LnEdit">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QRadioButton" name="customFile_RadBtn">
+         <property name="text">
+          <string>Plik wejściowy użytkownika:</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Wielkość danych wejściowych:</string>
          </property>
         </widget>
        </item>
@@ -40,9 +98,6 @@
           <string>Użyj generatora liczb losowych:</string>
          </property>
         </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="customFilePath_LnEdit"/>
        </item>
        <item row="3" column="1">
         <widget class="Line" name="line_2">
@@ -64,52 +119,7 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QRadioButton" name="customFile_RadBtn">
-         <property name="text">
-          <string>Plik wejściowy użytkownika:</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Wielkość danych wejściowych:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="Line" name="line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="4">
-        <widget class="Line" name="line_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4">
-        <widget class="QPushButton" name="customFilePath_Btn">
-         <property name="text">
-          <string>...</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QLineEdit" name="outputFilePath_LnEdit">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="4">
+       <item row="6" column="4">
         <widget class="QPushButton" name="outputFilePath_Btn">
          <property name="enabled">
           <bool>true</bool>
@@ -119,23 +129,27 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="customFilePath_LnEdit"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
        <item row="4" column="0">
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="histDataRange_Label">
          <property name="text">
-          <string>Forecacst range (num. of elements):</string>
+          <string>Historical range (num. of elements):</string>
          </property>
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QSpinBox" name="forecastRange_spBox">
-         <property name="minimum">
-          <number>1</number>
-         </property>
-         <property name="maximum">
-          <number>100000</number>
-         </property>
+        <widget class="QSpinBox" name="histDataRange_SpBox">
          <property name="value">
-          <number>10</number>
+          <number>60</number>
          </property>
         </widget>
        </item>

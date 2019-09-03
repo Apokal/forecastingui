@@ -21,16 +21,14 @@ namespace Quantitative
         {}
         virtual ~QLWMAQuntitativeMethod() {}
 
-        virtual std::vector<float> run(std::vector<float> initVector, size_t forecast_range)
+        virtual std::vector<float> run(std::vector<float> initVector, size_t history_range, size_t forecast_range)
         {
             std::vector<float> resultVector;
             // Number of previous values taken for one new forecast
-            // int historicalData = m_settings.period;
-            int historicalData = 60;
+            int historicalData = history_range;
 
             // Number of values in future forecast
-            // int numForFutureForecast = m_settings.numForFutureForecast;
-            int numForFutureForecast = 30;
+            int numForFutureForecast = forecast_range;
 
             std::cout << "Kalkulacja LWMA..." << std::endl;
 
