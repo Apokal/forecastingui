@@ -7,15 +7,21 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>670</height>
+    <height>585</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Praca dyplomowa: Mykhailo Butkevych</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
      <widget class="QGroupBox" name="genSettings_GrBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -156,7 +162,7 @@
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="2" column="0">
      <widget class="QGroupBox" name="numberSettings_GrBox">
       <property name="enabled">
        <bool>false</bool>
@@ -171,7 +177,7 @@
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="6" column="0">
      <widget class="QGroupBox" name="quantitiveMethods_GrBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -193,8 +199,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>602</width>
-            <height>67</height>
+            <width>452</width>
+            <height>156</height>
            </rect>
           </property>
           <attribute name="label">
@@ -206,8 +212,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>602</width>
-            <height>67</height>
+            <width>452</width>
+            <height>156</height>
            </rect>
           </property>
           <attribute name="label">
@@ -219,8 +225,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>602</width>
-            <height>67</height>
+            <width>452</width>
+            <height>156</height>
            </rect>
           </property>
           <attribute name="label">
@@ -232,8 +238,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>602</width>
-            <height>67</height>
+            <width>452</width>
+            <height>156</height>
            </rect>
           </property>
           <attribute name="label">
@@ -245,8 +251,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>602</width>
-            <height>67</height>
+            <width>452</width>
+            <height>156</height>
            </rect>
           </property>
           <attribute name="label">
@@ -258,8 +264,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>602</width>
-            <height>67</height>
+            <width>452</width>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -271,26 +277,30 @@
       </layout>
      </widget>
     </item>
-    <item>
-     <widget class="QPushButton" name="run_Btn">
-      <property name="text">
-       <string>Run</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="execTimeResults_PushBtn">
-      <property name="text">
-       <string>Show execution time results</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="methodsResut_PushBtn">
-      <property name="text">
-       <string>Show methods results</string>
-      </property>
-     </widget>
+    <item row="0" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="run_Btn">
+        <property name="text">
+         <string>Run</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="execTimeResults_PushBtn">
+        <property name="text">
+         <string>Show execution time results</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="methodsResut_PushBtn">
+        <property name="text">
+         <string>Show methods results</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

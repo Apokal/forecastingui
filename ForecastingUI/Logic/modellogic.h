@@ -5,6 +5,7 @@
 #include <string>
 #include <chrono>
 #include <vector>
+#include <memory>
 
 namespace Quantitative {
     class QQuantitativeMethodBase;
@@ -25,9 +26,9 @@ namespace Logic
     {
         bool use_custom_file = false;
         std::string custom_file_path;
-        std::vector<float> init_vector;
-
         size_t inputsize = 0;
+
+        std::vector<float> init_vector;
 
         float min_value = 0.0f;
         float max_value = 0.0f;
